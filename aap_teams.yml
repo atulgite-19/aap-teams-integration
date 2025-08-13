@@ -3,7 +3,7 @@
   hosts: localhost
   gather_facts: no
   vars:
-    teams_webhook_url: "https://outlook.office.com/webhook/your_webhook_url"
+    teams_webhook_url: "https://accenture.webhook.office.com/webhookb2/0841d96a-a5bc-426b-ade9-ce25e0db2a4b@e0793d39-0939-496d-b129-198edd916feb/IncomingWebhook/a0e3bdc45e6944d3b5321f642da2061d/fb5eaf27-9b49-4696-a36c-53f9c55b12c8/V2mSUCvLYEohlRYEL6rYjgoZx3lskHQkPWrk7Dulfog_I1"
     message_text: "Ansible Job '{{ ansible_job_id | default('N/A') }}' completed."
 
   tasks:
