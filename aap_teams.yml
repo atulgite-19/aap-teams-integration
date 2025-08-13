@@ -1,0 +1,26 @@
+---
+- name: Send a Microsoft Teams notification
+  hosts: localhost
+  gather_facts: no
+  vars:
+    teams_webhook_url: "https://outlook.office.com/webhook/your_webhook_url"
+    message_text: "Ansible Job '{{ ansible_job_id | default('N/A') }}' completed."
+
+  tasks:
+    - name: Notify Microsoft Teams
+      uri:
+        url: "{{ teams_webhook_url }}"
+        method: POST
+        headers:
+          Content-Type: "application/json"
+        body: |
+          {
+            "@type": "MessageCard",
+            "@context": "https://schema.org/extensions",
+            "summary": "AWX Job Notification",
+            "themeColor": "0076D7",
+            "title": "Job Complete",
+            "text": "{{ message_text }}"
+          }
+        body_format: json
+        status_code: 200
