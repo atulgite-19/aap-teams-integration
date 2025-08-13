@@ -4,8 +4,11 @@
   connection: local
   gather_facts: no
   vars:
-    teams_webhook_url: "https://accenture.webhook.office.com/webhookb2/0841d96a-a5bc-426b-ade9-ce25e0db2a4b@e0793d39-0939-496d-b129-198edd916feb/IncomingWebhook/a0e3bdc45e6944d3b5321f642da2061d/fb5eaf27-9b49-4696-a36c-53f9c55b12c8/V2mSUCvLYEohlRYEL6rYjgoZx3lskHQkPWrk7Dulfog_I1"
+    # teams_webhook_url: "https://accenture.webhook.office.com/webhookb2/0841d96a-a5bc-426b-ade9-ce25e0db2a4b@e0793d39-0939-496d-b129-198edd916feb/IncomingWebhook/a0e3bdc45e6944d3b5321f642da2061d/fb5eaf27-9b49-4696-a36c-53f9c55b12c8/V2mSUCvLYEohlRYEL6rYjgoZx3lskHQkPWrk7Dulfog_I1"
     message_text: "Ansible Job '{{ ansible_job_id | default('N/A') }}' completed."
+    # job_status: "{{ job_status }}"
+    # job_name: "{{ job_name }}"
+    # started_by: "{{ initiated_by | default('unknown user') }}"
 
   tasks:
     - name: Notify Microsoft Teams
@@ -20,8 +23,8 @@
             "@context": "https://schema.org/extensions",
             "summary": "AWX Job Notification",
             "themeColor": "0076D7",
-            "title": "Job Complete",
-            "text": "{{ message_text }}"
+            "title": "Job {{ job_name }} {{ job_status | upper }}",
+            "text": "Job {{ job_name }} was {{ job_status }} by {{ started_by }}."
           }
         body_format: json
         status_code: 200
